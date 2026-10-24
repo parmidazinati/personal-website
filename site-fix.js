@@ -91,7 +91,7 @@
     'پیام شما': 'Your Message',
     'ارسال': 'Send',
     'ارتباط': 'Contact',
-    'بیایید با هم کار کنیم': "Let's Work Together",
+    'پروژه‌ات را با هم شروع کنیم': "Let's start your project together",
     'اگر درباره طراحی، فناوری، هوش مصنوعی، آموزش یا توسعه محصولات دیجیتال علاقه‌مند به گفت‌وگو یا همکاری هستید، خوشحال می‌شوم در ارتباط باشیم.': "If you'd like to talk or collaborate on design, technology, AI, education, or digital product development, I'd love to hear from you.",
     'موقعیت': 'Location',
     'قائمشهر، ایران': 'Qaemshahr, Iran',
