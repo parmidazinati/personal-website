@@ -10,31 +10,65 @@
     el.classList.add('is-visible');
   });
 
-  /* 2. Services carousel prev/next (native scroll container). */
+  /* 2. Services carousel prev/next + dots + autoplay (the track is dir="ltr"). */
   var prevBtn = document.querySelector('button[aria-label="Previous slide"]');
   var nextBtn = document.querySelector('button[aria-label="Next slide"]');
   var track = document.querySelector('#services .overflow-x-auto');
+  var dots = document.querySelectorAll('#services button[aria-label^="Slide "]');
   function cardStep() {
     if (!track || !track.firstElementChild) return 320;
     var r = track.firstElementChild.getBoundingClientRect();
     return Math.round(r.width) + 20;
   }
   if (prevBtn && nextBtn && track) {
+    function maxScroll() { return track.scrollWidth - track.clientWidth; }
+    function syncDots() {
+      if (!dots.length) return;
+      var idx = Math.round(track.scrollLeft / cardStep());
+      if (idx < 0) idx = 0;
+      if (idx > dots.length - 1) idx = dots.length - 1;
+      dots.forEach(function (d, i) {
+        var on = i === idx;
+        d.classList.toggle('bg-brand', on);
+        d.classList.toggle('bg-white/15', !on);
+        d.setAttribute('aria-current', on ? 'true' : 'false');
+      });
+    }
     function syncDisabled() {
-      var max = track.scrollWidth - track.clientWidth;
+      var max = maxScroll();
       prevBtn.disabled = track.scrollLeft <= 0;
       nextBtn.disabled = track.scrollLeft >= max - 1;
+      syncDots();
     }
-    prevBtn.addEventListener('click', function () {
+    function goNext() {
+      if (track.scrollLeft >= maxScroll() - 1) track.scrollTo({ left: 0, behavior: 'smooth' });
+      else track.scrollBy({ left: cardStep(), behavior: 'smooth' });
+      setTimeout(syncDisabled, 600);
+    }
+    function goPrev() {
       track.scrollBy({ left: -cardStep(), behavior: 'smooth' });
       setTimeout(syncDisabled, 600);
-    });
-    nextBtn.addEventListener('click', function () {
-      track.scrollBy({ left: cardStep(), behavior: 'smooth' });
-      setTimeout(syncDisabled, 600);
+    }
+    var autoTimer = null;
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(goNext, 4000);
+    }
+    function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+    prevBtn.addEventListener('click', function () { goPrev(); startAuto(); });
+    nextBtn.addEventListener('click', function () { goNext(); startAuto(); });
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () {
+        track.scrollTo({ left: i * cardStep(), behavior: 'smooth' });
+        setTimeout(syncDisabled, 600);
+        startAuto();
+      });
     });
     track.addEventListener('scroll', syncDisabled, { passive: true });
+    track.addEventListener('mouseenter', stopAuto);
+    track.addEventListener('mouseleave', startAuto);
     syncDisabled();
+    startAuto();
   }
 
   /* 3. FA/EN toggle. */
@@ -49,7 +83,7 @@
     'طراح UI/UX · بنیان‌گذار کوانتوم': 'UI/UX Designer · Founder of Quantum',
     'پارمیدا زینتی': 'Parmida Zinati',
     'ایده‌های بزرگ را به تجربه‌های ماندگار تبدیل می‌کنم': 'I turn big ideas into lasting experiences',
-    'درخواست تماس با من': 'Request a Call',
+    'تماس با من': 'Contact Me',
     'کوانتوم': 'Quantum',
     'طراحی UI/UX': 'UI/UX Design',
     'طراحی رابط‌هایی ساده و شهودی که حول رفتار واقعی کاربر شکل می‌گیرند.': 'Designing simple, intuitive interfaces shaped around real user behavior.',
