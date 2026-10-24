@@ -112,7 +112,10 @@
     'یادآور دارو و قسط': 'Medicine & installment reminders',
     'تکرار روزانه/هفتگی/ماهانه': 'Daily/weekly/monthly repeats',
     'ورودی جلالی': 'Jalali input',
-    'باز کردن ربات در تلگرام': 'Open bot in Telegram'
+    'باز کردن ربات در تلگرام': 'Open bot in Telegram',
+    'برای دیدن پروژه‌ها اینجا بزنید': 'Tap here to see the projects',
+    'بازگشت به صفحه اصلی': 'Back to home',
+    'پروژه‌ها | پارمیدا زینتی': 'Projects | Parmida Zinati'
   };
   var EN_FA = {};
   Object.keys(FA_EN).forEach(function (k) { EN_FA[FA_EN[k]] = k; });
@@ -167,25 +170,7 @@
     }
   }
 
-  /* 4. Collapsible Projects section + mobile menu (the React menu never hydrates on this static export). */
-  var projHead = document.getElementById('project-head');
-  var projGrid = document.getElementById('project-grid');
-  var projChev = document.getElementById('project-chev');
-  function setProject(open) {
-    if (!projGrid) return;
-    projGrid.style.display = open ? '' : 'none';
-    if (projHead) projHead.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (projChev) projChev.style.transform = open ? 'rotate(180deg)' : '';
-  }
-  if (projHead && projGrid) {
-    projHead.addEventListener('click', function () { setProject(projGrid.style.display === 'none'); });
-    projHead.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setProject(projGrid.style.display === 'none'); }
-    });
-  }
-  document.querySelectorAll('a[href="#project"]').forEach(function (a) {
-    a.addEventListener('click', function () { setProject(true); });
-  });
+  /* 4. Mobile menu (the React menu never hydrates on this static export). */
   var menuBtn = document.querySelector('button[aria-label="Menu"]');
   var mobileMenu = document.getElementById('mobile-menu');
   if (menuBtn && mobileMenu) {
