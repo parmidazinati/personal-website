@@ -166,4 +166,39 @@
       });
     }
   }
+
+  /* 4. Collapsible Projects section + mobile menu (the React menu never hydrates on this static export). */
+  var projHead = document.getElementById('project-head');
+  var projGrid = document.getElementById('project-grid');
+  var projChev = document.getElementById('project-chev');
+  function setProject(open) {
+    if (!projGrid) return;
+    projGrid.style.display = open ? '' : 'none';
+    if (projHead) projHead.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (projChev) projChev.style.transform = open ? 'rotate(180deg)' : '';
+  }
+  if (projHead && projGrid) {
+    projHead.addEventListener('click', function () { setProject(projGrid.style.display === 'none'); });
+    projHead.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setProject(projGrid.style.display === 'none'); }
+    });
+  }
+  document.querySelectorAll('a[href="#project"]').forEach(function (a) {
+    a.addEventListener('click', function () { setProject(true); });
+  });
+  var menuBtn = document.querySelector('button[aria-label="Menu"]');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', function () {
+      var open = mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', !open);
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileMenu.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 })();
