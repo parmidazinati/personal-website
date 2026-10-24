@@ -6514,3 +6514,5 @@ html[lang="fa"] .font-latin {
 }
 
 /*# sourceMappingURL=%5Broot-of-the-server%5D__ac707dea._.css.map*/
+/* static-export fix: reveal-on-scroll JS never runs, so keep content visible */
+.reveal{opacity:1!important;transform:none!important;transition:none!important}
