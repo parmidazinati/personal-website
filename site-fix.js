@@ -99,7 +99,20 @@
     'تمامی حقوق محفوظ است.': 'All rights reserved.',
     'نام شما (اختیاری)': 'Your name (optional)',
     'ایمیل شما (اختیاری)': 'Your email (optional)',
-    'این‌جا بنویس…': 'Write here…'
+    'این‌جا بنویس…': 'Write here…',
+    'پروژه‌ها': 'Projects',
+    'ربات‌هایی که ساخته‌ام': 'Bots I have built',
+    'آسمان‌نما': 'AsemanNama',
+    'ربات تلگرامی هواشناسی؛ پیش‌بینی روزانه و ۷ روزه با داده‌های ECMWF، تاریخ جلالی و ارسال خودکار هر روز ساعت ۷ صبح.': 'Telegram weather bot: daily and 7-day forecasts powered by ECMWF data, Jalali dates, and an automatic push every morning at 7 AM.',
+    'پیش‌بینی ۷ روزه': '7-day forecast',
+    'ارسال خودکار صبحگاهی': 'Automatic morning push',
+    'تاریخ جلالی': 'Jalali dates',
+    'حواست هست': 'Havaset Hast',
+    'ربات تلگرامی یادآور؛ اقساط، قرارها، دارو، کلاس‌ها و کارهای مهم با ورودی تاریخ جلالی و تکرار روزانه، هفتگی و ماهانه.': 'Telegram reminder bot for installments, appointments, medicine, classes and important tasks, with Jalali date input and daily, weekly and monthly repeats.',
+    'یادآور دارو و قسط': 'Medicine & installment reminders',
+    'تکرار روزانه/هفتگی/ماهانه': 'Daily/weekly/monthly repeats',
+    'ورودی جلالی': 'Jalali input',
+    'باز کردن ربات در تلگرام': 'Open bot in Telegram'
   };
   var EN_FA = {};
   Object.keys(FA_EN).forEach(function (k) { EN_FA[FA_EN[k]] = k; });
